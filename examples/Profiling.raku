@@ -14,7 +14,7 @@ my $method = 'recursive';
 
 #========================================================================================================================
 say '=' x 120;
-say 'Numeric arguments';
+say "Numeric argument, $k degree";
 say '-' x 120;
 
 my $tstart = now;
@@ -26,7 +26,7 @@ say "Computation time : {$tend - $tstart}";
 
 #========================================================================================================================
 say '=' x 120;
-say 'Vectorized';
+say 'Vector argument, $k degree';
 say '-' x 120;
 
 my $tstart2 = now;
