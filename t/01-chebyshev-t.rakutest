@@ -1,0 +1,44 @@
+use v6.d;
+
+use lib <. lib>;
+
+use Math::Polynomial::Chebyshev;
+use Test;
+
+plan 12;
+
+my $method = 'recursive';
+
+{
+    is-approx chebyshev-t(0, 0, :$method), 1, "Constant is correctly boring";
+    is-approx chebyshev-t(0, 1/2, :$method), 1, "Constant is still correctly boring";
+}
+
+{
+
+    is-approx chebyshev-t(1, 0, :$method), 0, "Linear 0 is correct";
+    is-approx chebyshev-t(1, 1/2, :$method), 1/2, "Linear 1/2 is correct";
+    is-approx chebyshev-t(1, -1/2, :$method), -1/2, "Linear -1/2 is correct";
+}
+
+{
+    is-approx chebyshev-t(2, 0, :$method), -1, "Quadratic 0 is correct";
+    is-approx chebyshev-t(2, 1/2, :$method), -1/2, "Quadratic 1/2 is correct";
+    is-approx chebyshev-t(2, -1/2, :$method), -1/2, "Quadratic -1/2 is correct";
+}
+
+{
+    is-approx chebyshev-t(10, 0, :$method), -1, "10th polynomial at 0 is correct";
+    is-approx chebyshev-t(10, 1/2, :$method), -1/2, "10th polynomial at 1/2 is correct";
+    is-approx chebyshev-t(10, -1/2, :$method), -1/2, "10th polynomial at -1/2 is correct";
+}
+
+{
+    my $k = 4;
+    my @x = (-1.0, -0.9 ... 1.0);
+
+    my @data1 = @x.map({ chebyshev-t($k, $_, :$method) });
+    my @data2 = chebyshev-t($k, @x);
+
+    is-deeply @data1, @data2, "Point and vector invokations give the same results";
+}

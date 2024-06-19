@@ -1,0 +1,28 @@
+{
+  "name": "Math::Polynomial::Chebyshev",
+  "description": "Raku package with functionalities based on Chebyshev polynomials.",
+  "version": "0.0.1",
+  "authors": [
+    "Anton Antonov"
+  ],
+  "auth": "zef:antononcube",
+  "depends": [
+  ],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {
+    "Math::Polynomial::Chebyshev": "lib/Math/Polynomial/Chebyshev.rakumod"
+  },
+  "resources": [
+  ],
+  "license": "Artistic-2.0",
+  "tags": [
+    "polynomial",
+    "chebyshev",
+    "ChebyshevT",
+    "ChebyshevU"
+  ],
+  "api": "0",
+  "source-url": "https://github.com/antononcube/Raku-Math-Fitting.git",
+  "raku": "6.d"
+}
