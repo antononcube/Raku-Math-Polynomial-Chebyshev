@@ -5,7 +5,7 @@ use lib <. lib>;
 use Math::Polynomial::Chebyshev;
 use Test;
 
-plan 12;
+plan 13;
 
 my $method = 'recursive';
 
@@ -16,21 +16,25 @@ my $method = 'recursive';
 
 {
 
+    is-approx chebyshev-t(1, -1/2, :$method), -1/2, "Linear -1/2 is correct";
     is-approx chebyshev-t(1, 0, :$method), 0, "Linear 0 is correct";
     is-approx chebyshev-t(1, 1/2, :$method), 1/2, "Linear 1/2 is correct";
-    is-approx chebyshev-t(1, -1/2, :$method), -1/2, "Linear -1/2 is correct";
 }
 
 {
+    is-approx chebyshev-t(2, -1/2, :$method), -1/2, "Quadratic -1/2 is correct";
     is-approx chebyshev-t(2, 0, :$method), -1, "Quadratic 0 is correct";
     is-approx chebyshev-t(2, 1/2, :$method), -1/2, "Quadratic 1/2 is correct";
-    is-approx chebyshev-t(2, -1/2, :$method), -1/2, "Quadratic -1/2 is correct";
 }
 
 {
+    is-approx chebyshev-t(10, -1/2, :$method), -1/2, "10th polynomial at -1/2 is correct";
     is-approx chebyshev-t(10, 0, :$method), -1, "10th polynomial at 0 is correct";
     is-approx chebyshev-t(10, 1/2, :$method), -1/2, "10th polynomial at 1/2 is correct";
-    is-approx chebyshev-t(10, -1/2, :$method), -1/2, "10th polynomial at -1/2 is correct";
+}
+
+{
+    is-deeply chebyshev-t(3, [-1/2, 0, 1/2], :$method), [1.0, 0, -1.0], "Cubic vector is correct";
 }
 
 {
