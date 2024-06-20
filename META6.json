@@ -1,7 +1,7 @@
 {
   "name": "Math::Polynomial::Chebyshev",
   "description": "Raku package with functionalities based on Chebyshev polynomials.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "authors": [
     "Anton Antonov"
   ],
@@ -23,6 +23,6 @@
     "ChebyshevU"
   ],
   "api": "0",
-  "source-url": "https://github.com/antononcube/Raku-Math-Fitting.git",
+  "source-url": "https://github.com/antononcube/Raku-Math-Polynomial-Chebyshev.git",
   "raku": "6.d"
 }
