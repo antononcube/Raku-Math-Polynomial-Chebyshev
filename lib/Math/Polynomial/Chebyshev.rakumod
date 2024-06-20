@@ -70,8 +70,8 @@ multi sub chebyshev-t(UInt:D $k, $x, :$method is copy = Whatever) {
     die 'The value of $method is expected to be a string, Whatever, or WhateverCode'
     unless $method ~~ Str:D;
 
-    if !($x ~~ Numeric:D && $x.abs ≤ 1 || $x ~~ Positional:D && $x.all ~~ Numeric:D && $x.all ≤ 1) {
-        die 'The second argument is expected to be number or a list of numbers in [-1, 1].';
+    if !($x ~~ Numeric:D || $x ~~ Positional:D && $x.all ~~ Numeric:D ) {
+        die 'The second argument is expected to be number or a list of numbers.';
     }
 
     return do given $method.lc {
