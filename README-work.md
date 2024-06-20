@@ -73,7 +73,7 @@ my @data = [2.rand - 1, 10.rand] xx 20;
 my &lm = linear-model-fit(@data, :@basis);
 ```
 
-Here are plots:
+Here is a plot of the data and the fit:
 
 ```perl6
 my @fit = (-1, -0.98 ... 1).map({ [$_, &lm($_)] });
