@@ -9,32 +9,35 @@ use Data::Summarizers;
 
 my @x = (-1.0, -0.98 ... 1.0);
 my $k = 100;
+my $n = 10;
 
 my $method = 'recursive';
 
 #========================================================================================================================
 say '=' x 120;
-say "Numeric argument, $k degree";
+say "Numeric argument, $k degree, $n repetions";
 say '-' x 120;
 
 my $tstart = now;
-for ^10 {
+for ^$n {
     @x.map({ [$_, chebyshev-t($k, $_, :$method)]});
 }
 my $tend = now;
-say "Computation time : {$tend - $tstart}";
+say "Computation time, total   : {$tend - $tstart}";
+say "Computation time, per call: {($tend - $tstart) / $n}";
 
 #========================================================================================================================
 say '=' x 120;
-say 'Vector argument, $k degree';
+say "Vector argument, $k degree, $n repetions";
 say '-' x 120;
 
 my $tstart2 = now;
-for ^10 {
+for ^$n {
     chebyshev-t($k, @x);
 }
 my $tend2 = now;
-say "Computation time : {$tend2 - $tstart2}";
+say "Computation time, total   : {$tend2 - $tstart2}";
+say "Computation time, per call: {($tend2 - $tstart2) / $n}";
 
 #========================================================================================================================
 say '=' x 120;
