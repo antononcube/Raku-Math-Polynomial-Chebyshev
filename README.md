@@ -33,20 +33,22 @@ chebyshev-t(2, 0.3)
 # -0.82
 ```
 
-The default method is "recursive". Here is the "trigonometric" method:
-
-```perl6
-chebyshev-t(2, 3, method => 'trigonometric')
-```
-```
-# 17
-```
+The default method is "recursive":
 
 ```perl6
 chebyshev-t(2, 6, method => 'recursive')
 ```
 ```
 # 71
+```
+
+Here is an invocation of the  "trigonometric" method:
+
+```perl6
+chebyshev-t(2, 3, method => 'trigonometric')
+```
+```
+# 17
 ```
 
 Plot the 10th Chebyshev-T polynomial:
