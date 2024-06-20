@@ -134,7 +134,7 @@ multi sub chebyshev-u(UInt:D $k, :$method is copy = Whatever) {
     return { chebyshev-u($k, $_, :$method) };
 }
 
-multi sub chebyshev-t(UInt:D $k, Whatever, :$method is copy = Whatever) {
+multi sub chebyshev-u(UInt:D $k, Whatever, :$method is copy = Whatever) {
     return { chebyshev-u($k, $_, :$method) };
 }
 
