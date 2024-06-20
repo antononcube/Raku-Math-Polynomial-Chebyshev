@@ -42,22 +42,43 @@ Here is an invocation of the  "trigonometric" method:
 chebyshev-t(2, 3, method => 'trigonometric')
 ```
 
-**Remark:** Currently, the trigonometric method is implemented only for the Chebyshev polynomials of first kind.
-(Chebyshev-T).
+**Remark:** Currently, the trigonometric method is implemented only for the Chebyshev polynomials of first kind
+(Chebyshev-T.)
 
-Plot the 10th Chebyshev-T polynomial:
+Plot the 7th Chebyshev-T polynomial:
 
 ```perl6
 use Text::Plot;
 
 my @x = (-1, -0.99 ... 1);
-text-list-plot(@x, chebyshev-t(6, @x), width => 80)
+text-list-plot(@x, chebyshev-t(6, @x), width => 60)
 ```
 
 Here we make a Chebyshev-T function:
 
 ```perl6
 chebyshev-u(4)
+```
+
+A list of Chebyshev polynomials can be used as a basis for the models in 
+["Math::Fitting"](), [AAp2]. 
+Here is an example: 
+
+```perl6
+use Math::Fitting;
+
+my @basis = (^4).map({ chebyshev-t($_) });
+my @data = [2.rand - 1, 10.rand] xx 20;
+
+my &lm = linear-model-fit(@data, :@basis);
+```
+
+Here are plots:
+
+```perl6
+my @fit = (-1, -0.98 ... 1).map({ [$_, &lm($_)] });
+say <fit data> Z=> <* □>;
+say text-list-plot([@fit, @data])
 ```
 
 --------

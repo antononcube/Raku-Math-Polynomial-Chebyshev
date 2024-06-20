@@ -51,39 +51,34 @@ chebyshev-t(2, 3, method => 'trigonometric')
 # 17
 ```
 
-**Remark:** Currently, the trigonometric method is implemented only for the Chebyshev polynomials of first kind.
-(Chebyshev-T).
+**Remark:** Currently, the trigonometric method is implemented only for the Chebyshev polynomials of first kind
+(Chebyshev-T.)
 
-Plot the 10th Chebyshev-T polynomial:
+Plot the 7th Chebyshev-T polynomial:
 
 ```perl6
 use Text::Plot;
 
 my @x = (-1, -0.99 ... 1);
-text-list-plot(@x, chebyshev-t(6, @x), width => 80)
+text-list-plot(@x, chebyshev-t(6, @x), width => 60)
 ```
 ```
-# +---+-----------------+----------------+-----------------+----------------+----+      
-# |                                                                              |      
-# +   *               *****                              *****              *    +  1.00
-# |                  **   **                           **    **                  |      
-# |    *            *       *                          *      **            *    |      
-# |                **       **                        *        *                 |      
-# +                *          *                      *          *                +  0.50
-# |    *          *           **                    **          **          *    |      
-# |              **            *                    *            **              |      
-# |     *        *              *                 **              *        *     |      
-# +             **               *                *               **             +  0.00
-# |     *       *                **              *                 *       *     |      
-# |     *      **                 *             **                 **      *     |      
-# +      *     *                   *            *                   *     *      + -0.50
-# |      *    **                   **          *                    **    *      |      
-# |      *   **                      *        *                      *    *      |      
-# |       *  *                        **    **                        *  *       |      
-# +       ***                          ******                         ****       + -1.00
-# |                                                                              |      
-# +---+-----------------+----------------+-----------------+----------------+----+      
-#     -1.00             -0.50            0.00              0.50             1.00
+# +---+------------+-----------+------------+------------+---+      
+# |                                                          |      
+# +   *         ******                    *****          *   +  1.00
+# |   *         *    **                  **    *         *   |      
+# +            *      **                **     **            +  0.50
+# |   *       **       *               **       **       *   |      
+# |   *       *         *              *         *       *   |      
+# +          *          **            *           *          +  0.00
+# |    *     *           **          **           *     *    |      
+# |    *    *             **        **             *    *    |      
+# +    *   **              **      **              **  **    + -0.50
+# |     * **                **    **                *  *     |      
+# +     ***                  ******                  ***     + -1.00
+# |                                                          |      
+# +---+------------+-----------+------------+------------+---+      
+#     -1.00        -0.50       0.00         0.50         1.00
 ```
 
 Here we make a Chebyshev-T function:
@@ -92,7 +87,50 @@ Here we make a Chebyshev-T function:
 chebyshev-u(4)
 ```
 ```
-# -> ;; $_? is raw = OUTER::<$_> { #`(Block|5419846387320) ... }
+# -> ;; $_? is raw = OUTER::<$_> { #`(Block|2377734473048) ... }
+```
+
+A list of Chebyshev polynomials can be used as a basis for the models in 
+["Math::Fitting"](), [AAp2]. 
+Here is an example: 
+
+```perl6
+use Math::Fitting;
+
+my @basis = (^4).map({ chebyshev-t($_) });
+my @data = [2.rand - 1, 10.rand] xx 20;
+
+my &lm = linear-model-fit(@data, :@basis);
+```
+```
+# Math::Fitting::FittedModel(type => linear, data => (20, 2), response-index => 1, basis => 4)
+```
+
+Here are plots:
+
+```perl6
+my @fit = (-1, -0.98 ... 1).map({ [$_, &lm($_)] });
+say <fit data> Z=> <* □>;
+say text-list-plot([@fit, @data])
+```
+```
+# (fit => * data => □)
+# +---+------------+-----------+------------+------------+---+       
+# +                                                          +  10.00
+# |                                           □              |       
+# |                                □  □                      |       
+# +                                                     □    +   8.00
+# |                               □         ****□□****  □□   |       
+# +                                 ********          ****   +   6.00
+# |                           *******        □               |       
+# +                   □  ******  □                 □         +   4.00
+# |   □***□    **********                                    |       
+# +       ****** □                                   □       +   2.00
+# |                                          □               |       
+# |                          □                               |       
+# +                                                          +   0.00
+# +---+------------+-----------+------------+------------+---+       
+#     -1.00        -0.50       0.00         0.50         1.00
 ```
 
 --------
