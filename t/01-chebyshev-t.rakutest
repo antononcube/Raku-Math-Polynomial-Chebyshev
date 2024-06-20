@@ -5,7 +5,7 @@ use lib <. lib>;
 use Math::Polynomial::Chebyshev;
 use Test;
 
-plan 13;
+plan 16;
 
 my $method = 'recursive';
 
@@ -45,4 +45,12 @@ my $method = 'recursive';
     my @data2 = chebyshev-t($k, @x);
 
     is-deeply @data1, @data2, "Point and vector invokations give the same results";
+}
+
+{
+    isa-ok chebyshev-t(4, :$method), Callable:D, 'Getting a Callable without x-argument';
+    isa-ok chebyshev-t(4, Whatever, :$method), Callable:D, 'Getting a Callable with Whatever as an x-argument';
+
+    my &f = chebyshev-t(4, :$method);
+    is-deeply (^5)».&f.Array, chebyshev-t(4, (^5)), 'Same result with function over data and data argument'
 }
