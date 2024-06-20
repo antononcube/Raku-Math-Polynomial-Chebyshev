@@ -1,8 +1,6 @@
 #!/usr/bin/env raku
 use v6.d;
 
-use lib <. lib>;
-
 use Math::Polynomial::Chebyshev;
 use Data::TypeSystem;
 use Data::Summarizers;
